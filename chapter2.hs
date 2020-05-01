@@ -5,10 +5,14 @@ n = a `div` length xs
 
 myLast [] = []
 myLast [x] = [x]
-myLast (x:xs) = myLast xs
+myLast (_:xs) = myLast xs
 
-myLast1 xs = tail( reverse xs )
+myLast1 xs = head( reverse xs )
 
 myInit xs = take xsLen xs
             where
               xsLen = (length xs)- 1
+
+myInit1 [] = []
+myInit1 [_] = []
+myInit1 (x:xs) = [x] ++ myInit1 xs 
