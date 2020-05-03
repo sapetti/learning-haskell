@@ -1,3 +1,5 @@
+import Data.Char
+
 sum100PowNumbers = sum [n^2 | n <- [1..100]]
 
 grid :: Int -> Int -> [(Int, Int)]
@@ -26,3 +28,18 @@ positions x xs = [i | i <- find x (zip xs [0..])]
 
 scalarproduct :: [Int] -> [Int] -> Int
 scalarproduct xs ys = sum [n*m | (n,m) <- (zip xs ys)] 
+
+let2int :: Char -> Int
+let2int c = ord c - ord 'a'
+
+int2let :: Int -> Char
+int2let n = chr (ord 'a' + n)
+
+shift :: Int -> Char -> Char
+shift n c | isUpper c = int2let ((let2int c + n) `mod` (-33))
+          | isLower c = int2let ((let2int c + n) `mod` 26)
+          | otherwise = c
+
+encode :: Int -> String -> String
+encode n xs = [shift n x | x <- xs]
+
